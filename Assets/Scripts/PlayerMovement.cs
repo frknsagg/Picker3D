@@ -7,10 +7,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     private float _horizontalValue;
+    private Rigidbody _fizik;
     
    private void Start()
    {
-       
+       _fizik = GetComponent<Rigidbody>();
    }
 
    
@@ -20,9 +21,9 @@ public class PlayerMovement : MonoBehaviour
         _horizontalValue = Mathf.Clamp(_horizontalValue, -2.3f, 2.3f); // Karakterin x ekseninde hareketini sınırlamak için yazılan kod
 
 
-        Vector3 vec=new Vector3(_horizontalValue,transform.position.y,transform.position.z+Time.deltaTime);
-        transform.position = vec;
+        Vector3 vec=new Vector3(_horizontalValue,transform.position.y,transform.position.z+Time.deltaTime*2f);
+        _fizik.MovePosition(vec);
         
-        transform.Translate(Vector3.right*Time.deltaTime);//Objenin yönü yanlış tarafa baktığı için forward yerine right kullandım.
+       
     }
 }
