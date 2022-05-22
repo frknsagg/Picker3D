@@ -1,34 +1,25 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using  DG.Tweening;
+using DG.Tweening;
 using TMPro;
 
 public class TriggerPlatform : MonoBehaviour
 {
     private GameObject _parentObject;
-    public Pushing push;
+
     private Material _currentColor;
     [SerializeField] private int topSayisi = 0;
     private TextMeshProUGUI MinimumText;
     private TextMeshProUGUI MaximumText;
     public static TriggerPlatform instance;
     private int maxBallCount = 5;
+    public GameObject KarakterGameObject;
+    private Sequence _sequence;
     
-
-    private void Awake()
-    {
-        if (instance==null)
-        {
-            instance = this;
-        }
-    }
-
-
     private void Start()
     {
-        
+        DOTween.Init();
+        _sequence = DOTween.Sequence();
         _parentObject = transform.parent.gameObject;
         _currentColor = _parentObject.GetComponent<MeshRenderer>().material;
         MinimumText = _parentObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
@@ -42,33 +33,42 @@ public class TriggerPlatform : MonoBehaviour
         {
             StartCoroutine(PlatformAnim());
         }
-        
+
         if (other.CompareTag("Collectable"))
         {
             topSayisi += 1;
-            MinimumText.text =""  + topSayisi;
-           
+            MinimumText.text = "" + topSayisi;
+            StartCoroutine(DestroyCollectable(other.gameObject));
         }
     }
 
     private IEnumerator PlatformAnim()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(2f);
 
-        if (topSayisi>=maxBallCount)
+        if (topSayisi >= maxBallCount)
         {
-            _parentObject.transform.DOMoveY(0, 0.5f);
-            _currentColor.DOColor(Color.green, 0.5f);
+          
+
+            _sequence.Append(_parentObject.transform.DOMoveY(0, 0.5f));
+            _sequence.Join(_currentColor.DOColor(Color.green, 0.5f));
+           
+           
+            gameObject.tag = "Untagged";
+            KarakterGameObject.GetComponent<PlayerMovement>().enabled = true;
+            
+
         }
         else
         {
-            Debug.Log("Game Over");
+            LevelManager.instance.GameOver();
         }
-       
+    }
+
+    private IEnumerator DestroyCollectable(GameObject other)
+    {
+        yield return new WaitForSeconds(1.5f);
+        Destroy(other.gameObject);
         
     }
-    
-    
 }
-
-

@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         Vector3 vec=new Vector3(_horizontalValue,transform.position.y,transform.position.z+Time.deltaTime*2f);
-        _fizik.MovePosition(vec);
+        _fizik.MovePosition(vec);//Addforce ile hareket ettir.
         
        
     }

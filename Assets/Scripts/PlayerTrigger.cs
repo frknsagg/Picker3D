@@ -7,14 +7,6 @@ public class PlayerTrigger : MonoBehaviour
 {
     private List<GameObject> _collectedObjects;
 
-    void Start()
-    {
-    }
-
-
-    void Update()
-    {
-    }
 
     private void OnTriggerEnter(Collider other)
     {
