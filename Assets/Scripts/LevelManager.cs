@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private LevelPrefabs m_LevelPrefabs = null;
-    [SerializeField] private int _currentLevel=2;
+    [SerializeField] private int _currentLevel;
     public static LevelManager instance;
     private GameObject _currentLevelObject;
 
@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         _currentLevel= PlayerPrefs.GetInt("levelIndex");
+        UI_Manager.instance._levelTextChange(_currentLevel);
         CreateLevel();
 
     }
@@ -39,7 +40,7 @@ public class LevelManager : MonoBehaviour
 
     public void FinishLevel()
     {
-        Debug.Log("finish çalıştı");
+        UI_Manager.instance.NextLevelMenuEnabled();
         SaveLevel();
     }
 
@@ -47,8 +48,7 @@ public class LevelManager : MonoBehaviour
     {
         _currentLevel++;
         PlayerPrefs.SetInt("levelIndex",_currentLevel);
-        Debug.Log(_currentLevel);
-        Debug.Log(PlayerPrefs.GetInt("levelIndex"));
+        
     }
 
     public void RestartGame()
