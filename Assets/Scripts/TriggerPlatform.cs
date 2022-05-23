@@ -11,9 +11,9 @@ public class TriggerPlatform : MonoBehaviour
     [SerializeField] private int topSayisi = 0;
     private TextMeshProUGUI MinimumText;
     private TextMeshProUGUI MaximumText;
-    public static TriggerPlatform instance;
+    
     private int maxBallCount = 5;
-    public GameObject KarakterGameObject;
+    private GameObject KarakterGameObject;
     private Sequence _sequence;
     
     private void Start()
@@ -25,6 +25,7 @@ public class TriggerPlatform : MonoBehaviour
         MinimumText = _parentObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         MaximumText = _parentObject.transform.GetChild(0).transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         MaximumText.text = "" + maxBallCount;
+        KarakterGameObject = GameObject.Find("Player");
     }
 
     private void OnTriggerEnter(Collider other)

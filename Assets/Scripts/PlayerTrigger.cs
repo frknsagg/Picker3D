@@ -14,5 +14,12 @@ public class PlayerTrigger : MonoBehaviour
         {
             gameObject.GetComponent<PlayerMovement>().enabled = false;
         }
+
+        if (other.CompareTag("Finish"))
+        {
+            gameObject.GetComponent<PlayerMovement>().enabled = false;
+            LevelManager.instance.FinishLevel();
+           
+        }
     }
 }
