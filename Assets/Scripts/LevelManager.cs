@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class LevelManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] private LevelPrefabs m_LevelPrefabs = null;
     [SerializeField] private int currentLevel;
     [SerializeField] private GameObject playerObject;
+    [SerializeField] private Material cubeMaterial;
     
     public static LevelManager instance;
     private GameObject _currentLevelObject;
@@ -32,16 +34,15 @@ public class LevelManager : MonoBehaviour
 
     private void CreateLevel()
     {
+        currentLevel= PlayerPrefs.GetInt("levelIndex");
         if (currentLevel==null)
         {
             currentLevel = 1;
         }
-        currentLevel= PlayerPrefs.GetInt("levelIndex");
+        
         int levelIndex = currentLevel % m_LevelPrefabs.LevelList.Count;
-        Debug.Log(PlayerPrefs.GetInt("levelindex = "+levelIndex));
         _currentLevelObject = Instantiate(m_LevelPrefabs.LevelList[levelIndex]);
         
-
         PlayerStartPosition();
 
 
@@ -56,8 +57,10 @@ public class LevelManager : MonoBehaviour
     public void NextLevel()
     {
         Destroy(_currentLevelObject);
+        cubeMaterial.color = LevelRandomColor();
         CreateLevel();
         UI_Manager.instance._levelTextChange(currentLevel);
+        
         
     }
 
@@ -93,5 +96,14 @@ public class LevelManager : MonoBehaviour
         UI_Manager.instance._levelTextChange(currentLevel);
         
         CreateLevel();
+    }
+
+    public Color LevelRandomColor()
+    {
+        float r = Random.Range(0.0f, 1.0f);
+        float g = Random.Range(0.0f, 1.0f);
+        float b = Random.Range(0.0f, 1.0f);
+        Color color = new Color(r, g, b, 255);
+        return color;
     }
 }

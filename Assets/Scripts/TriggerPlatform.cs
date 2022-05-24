@@ -6,14 +6,17 @@ using TMPro;
 public class TriggerPlatform : MonoBehaviour
 {
     private GameObject _parentObject;
+    private GameObject KarakterGameObject;
 
     private Material _currentColor;
+    [SerializeField] private Material _cubeColor;
     [SerializeField] private int topSayisi = 0;
+    
     private TextMeshProUGUI MinimumText;
     private TextMeshProUGUI MaximumText;
     
     private int maxBallCount = 5;
-    private GameObject KarakterGameObject;
+    
     private Sequence _sequence;
     
     private void Start()
@@ -23,8 +26,8 @@ public class TriggerPlatform : MonoBehaviour
         _parentObject = transform.parent.gameObject;
         _currentColor = _parentObject.GetComponent<MeshRenderer>().material;
         MinimumText = _parentObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-        MaximumText = _parentObject.transform.GetChild(0).transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        MaximumText.text = "" + maxBallCount;
+        MaximumText = _parentObject.transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        MaximumText.text = "/ " + maxBallCount;
         KarakterGameObject = GameObject.Find("Player");
     }
 
@@ -52,12 +55,14 @@ public class TriggerPlatform : MonoBehaviour
           
 
             _sequence.Append(_parentObject.transform.DOMoveY(0, 0.5f));
-            _sequence.Join(_currentColor.DOColor(Color.green, 0.5f));
+            _sequence.Join(_currentColor.DOColor(_cubeColor.color, 0.5f));
            
            
             gameObject.tag = "Untagged";
             KarakterGameObject.GetComponent<PlayerMovement>().enabled = true;
-            
+            MinimumText.enabled = false;
+            MaximumText.enabled = false;
+
 
         }
         else
