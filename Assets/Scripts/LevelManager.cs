@@ -8,9 +8,14 @@ public class LevelManager : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private LevelPrefabs m_LevelPrefabs = null;
-    [SerializeField] private int _currentLevel;
+    [SerializeField] private int currentLevel;
+    [SerializeField] private GameObject playerObject;
+    
     public static LevelManager instance;
     private GameObject _currentLevelObject;
+    
+    
+    
 
     private void Awake()
     {
@@ -21,21 +26,26 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        _currentLevel= PlayerPrefs.GetInt("levelIndex");
-        UI_Manager.instance._levelTextChange(_currentLevel);
+        currentLevel= PlayerPrefs.GetInt("levelIndex");
+        UI_Manager.instance._levelTextChange(currentLevel);
         CreateLevel();
 
     }
 
     private void CreateLevel()
     {
-        if (_currentLevel==null)
+        if (currentLevel==null)
         {
-            _currentLevel = 1;
+            currentLevel = 1;
         }
-        int levelIndex = _currentLevel % m_LevelPrefabs.LevelList.Count;
+        currentLevel= PlayerPrefs.GetInt("levelIndex");
+        int levelIndex = currentLevel % m_LevelPrefabs.LevelList.Count;
         Debug.Log(PlayerPrefs.GetInt("levelindex = "+levelIndex));
         _currentLevelObject = Instantiate(m_LevelPrefabs.LevelList[levelIndex]);
+
+        PlayerStartPosition();
+
+
     }
 
     public void FinishLevel()
@@ -44,21 +54,36 @@ public class LevelManager : MonoBehaviour
         SaveLevel();
     }
 
-    private void SaveLevel()
+    public void NextLevel()
     {
-        _currentLevel++;
-        PlayerPrefs.SetInt("levelIndex",_currentLevel);
+        Destroy(_currentLevelObject);
+        CreateLevel();
+        UI_Manager.instance._levelTextChange(currentLevel);
         
     }
 
-    public void RestartGame()
+    private void SaveLevel()
     {
-        Debug.Log("Oyun Tekrar Başlatıldı");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        currentLevel++;
+        PlayerPrefs.SetInt("levelIndex",currentLevel);
+        
+    }
+
+    public void RestartLevel()
+    {
+        Destroy(_currentLevelObject);
+        CreateLevel();
     }
 
     public void GameOver()
     {
         Debug.Log("Oyun Bitti");
+        UI_Manager.instance.LevelFailedMenuEnable();
+    }
+
+    private void PlayerStartPosition()
+    {
+        playerObject.GetComponent<Transform>().position = new Vector3(0.0f, 0.758f, 14.6f); 
+        playerObject.GetComponent<PlayerMovement>().enabled = true;
     }
 }
