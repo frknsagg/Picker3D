@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
 
     private void CreateLevel()
     {
-        currentLevel= PlayerPrefs.GetInt("levelIndex");
+        currentLevel = PrefsManager.instance.getLevel();
         if (currentLevel==null)
         {
             currentLevel = 1;
@@ -67,7 +67,7 @@ public class LevelManager : MonoBehaviour
     private void SaveLevel()
     {
         currentLevel++;
-        PlayerPrefs.SetInt("levelIndex",currentLevel);
+        PrefsManager.instance.SaveLevel(currentLevel);
         
     }
 
@@ -92,7 +92,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame()
     {
-        currentLevel= PlayerPrefs.GetInt("levelIndex");
+        currentLevel = PrefsManager.instance.getLevel();
         UI_Manager.instance._levelTextChange(currentLevel);
         
         CreateLevel();

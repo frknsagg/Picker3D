@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class UI_Manager : MonoBehaviour
 {
-    public TextMeshProUGUI LevelText;
+   [SerializeField] private TextMeshProUGUI LevelText;
     
     
     [SerializeField] private GameObject nextLevelTextMenu;

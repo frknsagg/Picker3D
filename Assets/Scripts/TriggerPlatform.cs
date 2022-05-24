@@ -14,8 +14,8 @@ public class TriggerPlatform : MonoBehaviour
     
     private TextMeshProUGUI MinimumText;
     private TextMeshProUGUI MaximumText;
+
     
-    private int maxBallCount = 5;
     
     private Sequence _sequence;
     
@@ -27,7 +27,7 @@ public class TriggerPlatform : MonoBehaviour
         _currentColor = _parentObject.GetComponent<MeshRenderer>().material;
         MinimumText = _parentObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         MaximumText = _parentObject.transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
-        MaximumText.text = "/ " + maxBallCount;
+        MaximumText.text = "/ " + LevelSettings.instance.MaxBallCount;
         KarakterGameObject = GameObject.Find("Player");
     }
 
@@ -36,6 +36,7 @@ public class TriggerPlatform : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             StartCoroutine(PlatformAnim());
+            
         }
 
         if (other.CompareTag("Collectable"))
@@ -50,7 +51,7 @@ public class TriggerPlatform : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
 
-        if (topSayisi >= maxBallCount)
+        if (topSayisi >= LevelSettings.instance.MaxBallCount)
         {
           
 
