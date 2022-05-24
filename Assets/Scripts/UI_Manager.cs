@@ -12,6 +12,7 @@ public class UI_Manager : MonoBehaviour
     
     [SerializeField] private GameObject nextLevelTextMenu;
     [SerializeField] private GameObject levelFailedMenu;
+    [SerializeField] private GameObject startGameMenu;
 
    public static UI_Manager instance;
 
@@ -26,6 +27,7 @@ public class UI_Manager : MonoBehaviour
       
       nextLevelTextMenu.gameObject.SetActive(false);
       levelFailedMenu.gameObject.SetActive(false);
+      startGameMenu.gameObject.SetActive(true);
       
    }
 
@@ -52,6 +54,12 @@ public class UI_Manager : MonoBehaviour
    public void NextLevelButton()
    {
       LevelManager.instance.NextLevel();
-      levelFailedMenu.gameObject.SetActive(false);
+      nextLevelTextMenu.gameObject.SetActive(false);
+   }
+
+   public void StartGameButton()
+   {
+      startGameMenu.gameObject.SetActive(false);
+      LevelManager.instance.StartGame();
    }
 }
