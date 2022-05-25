@@ -13,6 +13,7 @@ public class UI_Manager : MonoBehaviour
     [SerializeField] private GameObject nextLevelTextMenu;
     [SerializeField] private GameObject levelFailedMenu;
     [SerializeField] private GameObject startGameMenu;
+    [SerializeField] private TextMeshProUGUI diamondCount;
 
    public static UI_Manager instance;
 
@@ -28,7 +29,8 @@ public class UI_Manager : MonoBehaviour
       nextLevelTextMenu.gameObject.SetActive(false);
       levelFailedMenu.gameObject.SetActive(false);
       startGameMenu.gameObject.SetActive(true);
-      
+      diamondCount.text = "Elmas Sayisi " + PrefsManager.instance.GetDiamondCount();
+
    }
 
    public void _levelTextChange(int levelIndex)
@@ -61,5 +63,10 @@ public class UI_Manager : MonoBehaviour
    {
       startGameMenu.gameObject.SetActive(false);
       LevelManager.instance.StartGame();
+   }
+
+   public void DiamondTextChange()
+   {
+      diamondCount.text = "Elmas Sayisi " + PrefsManager.instance.GetDiamondCount();
    }
 }

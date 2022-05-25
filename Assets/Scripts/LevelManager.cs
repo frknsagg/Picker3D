@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        
+        PrefsManager.instance.SaveLevel(1);
 
     }
 
@@ -50,6 +50,8 @@ public class LevelManager : MonoBehaviour
 
     public void FinishLevel()
     {
+        PrefsManager.instance.SaveDiamondCount(60);
+        
         UI_Manager.instance.NextLevelMenuEnabled();
         SaveLevel();
     }

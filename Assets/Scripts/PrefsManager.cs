@@ -29,7 +29,9 @@ public class PrefsManager : MonoBehaviour
 
   public void SaveDiamondCount(int count)
   {
-      PlayerPrefs.SetInt("diamondCount",count);
+      int toplam = GetDiamondCount() + count;
+      PlayerPrefs.SetInt("diamondCount",toplam);
+      UI_Manager.instance.DiamondTextChange();
   }
 
   public int GetDiamondCount()
