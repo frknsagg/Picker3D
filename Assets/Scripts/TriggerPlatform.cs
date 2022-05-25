@@ -23,10 +23,13 @@ public class TriggerPlatform : MonoBehaviour
     {
         DOTween.Init();
         _sequence = DOTween.Sequence();
+        
         _parentObject = transform.parent.gameObject;
         _currentColor = _parentObject.GetComponent<MeshRenderer>().material;
+        
         MinimumText = _parentObject.transform.GetChild(0).transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         MaximumText = _parentObject.transform.GetChild(0).transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+        
         MaximumText.text = "/ " + LevelSettings.instance.MaxBallCount;
         KarakterGameObject = GameObject.Find("Player");
     }

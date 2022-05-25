@@ -8,12 +8,13 @@ using UnityEngine.UI;
 public class UI_Manager : MonoBehaviour
 {
    [SerializeField] private TextMeshProUGUI LevelText;
+   [SerializeField] private TextMeshProUGUI diamondCount;
     
     
     [SerializeField] private GameObject nextLevelTextMenu;
     [SerializeField] private GameObject levelFailedMenu;
     [SerializeField] private GameObject startGameMenu;
-    [SerializeField] private TextMeshProUGUI diamondCount;
+    
 
    public static UI_Manager instance;
 

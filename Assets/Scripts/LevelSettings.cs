@@ -18,35 +18,49 @@ public class LevelSettings : MonoBehaviour
    }
 
    void Start()
-    {
-        RandomCollectablePosition(10);
-    }
+   {
+       RandomCollectableInstantiate(MaxBallCount * 2);
+   }
 
-    
-  
-    public void RandomCollectablePosition(int count)
-    {
+   public void RandomCollectableInstantiate(int count)
+   {
+       int r = Random.Range(0, collectableObjects.Count);
 
         for (int i = 0; i < count; i++)
         {
-            float x = Random.Range(2.15f, -2.15f);
-            float z = Random.Range(20.0f, 25.0f);
-            //38-50
-            //66-85
-            Instantiate(collectableObjects[0], new Vector3(x, 0.5f, z), Quaternion.identity);
+             float x = Random.Range(-2.15f, 2.15f);
+             float z = Random.Range(18.0f, 27.0f);
+             Vector3 vec = new Vector3(x, 2.80f, z);
+             GameObject obje= Instantiate(collectableObjects[r], vec, Quaternion.identity);
+           
+        }
+        for (int i = 0; i < count; i++)
+        {
+            float x = Random.Range(-2.15f, 2.15f);
+            float z = Random.Range(36.0f, 56.0f);
+            Vector3 vec = new Vector3(x, 2.80f, z);
+            GameObject obje= Instantiate(collectableObjects[r], vec, Quaternion.identity);
+          
+        }
+        for (int i = 0; i < count; i++)
+        {
+            float x = Random.Range(-2.15f, 2.15f);
+            float z = Random.Range(66.0f, 85.0f);
+            Vector3 vec = new Vector3(x, 2.80f, z);
+            GameObject obje= Instantiate(collectableObjects[r], vec, Quaternion.identity);
+            
         }
         
         
     }
-
     private int BallCount(int levelIndex)
     {
-        if (levelIndex<9)
+        if (levelIndex<=9)
         {
             return 5;
         }
-
-        return (levelIndex / 10) * 10;
+        return (levelIndex / 10) * 10; 
+       
     }
 }
 

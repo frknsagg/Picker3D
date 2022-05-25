@@ -6,8 +6,6 @@ using DG.Tweening;
 
 public class Pushing : MonoBehaviour
 {
-    private Rigidbody fizik;
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Collectable"))

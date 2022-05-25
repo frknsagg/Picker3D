@@ -7,14 +7,11 @@ public class PrefsManager : MonoBehaviour
 {
    public static PrefsManager instance;
 
-   public List<Transform> ballTransform;
-   
-   
-
    private void Awake()
    {
       instance = this;
-      PlayerPrefs.SetInt("levelIndex",10);
+      
+      
    }
 
   public void SaveLevel(int levelIndex)

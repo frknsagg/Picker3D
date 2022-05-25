@@ -26,16 +26,10 @@ public class LevelManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        PrefsManager.instance.SaveLevel(1);
-
-    }
-
     private void CreateLevel()
     {
         currentLevel = PrefsManager.instance.getLevel();
-        if (currentLevel==null)
+        if (currentLevel==0)
         {
             currentLevel = 1;
         }
@@ -94,10 +88,11 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame()
     {
-        currentLevel = PrefsManager.instance.getLevel();
-        UI_Manager.instance._levelTextChange(currentLevel);
         
         CreateLevel();
+        UI_Manager.instance._levelTextChange(currentLevel);
+        
+        
     }
 
     public Color LevelRandomColor()
