@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour
 
     private void CreateLevel()
     {
+        foreach (var o in GameObject.FindGameObjectsWithTag("Collectable")) Destroy(o);
         currentLevel = PrefsManager.instance.getLevel();
         if (currentLevel==0)
         {

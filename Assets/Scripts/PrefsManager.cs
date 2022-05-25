@@ -10,8 +10,6 @@ public class PrefsManager : MonoBehaviour
    private void Awake()
    {
       instance = this;
-      
-      
    }
 
   public void SaveLevel(int levelIndex)

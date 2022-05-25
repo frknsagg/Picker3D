@@ -13,6 +13,7 @@ public class PlayerTrigger : MonoBehaviour
         if (other.CompareTag("Cube"))
         {
             gameObject.GetComponent<PlayerMovement>().enabled = false;
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         }
 
         if (other.CompareTag("Finish"))

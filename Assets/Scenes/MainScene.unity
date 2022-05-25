@@ -493,10 +493,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LevelText: {fileID: 647230358}
+  diamondCount: {fileID: 120992053}
   nextLevelTextMenu: {fileID: 1998500039}
   levelFailedMenu: {fileID: 1056630394}
   startGameMenu: {fileID: 1594009755}
-  diamondCount: {fileID: 120992053}
 --- !u!4 &380460102
 Transform:
   m_ObjectHideFlags: 0
@@ -1175,7 +1175,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd186992e5ef1b4a90b9ceafd92d4eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballTransform: []
 --- !u!4 &1220811333
 Transform:
   m_ObjectHideFlags: 0
@@ -2276,8 +2275,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3105675782207121892, guid: d376aa075ae331d4881a7bace9f74173, type: 3}
+      propertyPath: m_Mass
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105675782207121892, guid: d376aa075ae331d4881a7bace9f74173, type: 3}
       propertyPath: m_UseGravity
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3105675782207121892, guid: d376aa075ae331d4881a7bace9f74173, type: 3}
+      propertyPath: m_Constraints
+      value: 116
       objectReference: {fileID: 0}
     - target: {fileID: 3105675782207121893, guid: d376aa075ae331d4881a7bace9f74173, type: 3}
       propertyPath: m_Enabled
